@@ -2,6 +2,9 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 import postRoutes from './routes/posts.js'
 
@@ -16,13 +19,10 @@ app.use(cors());
 
 app.use('/posts', postRoutes)
 
-const MONGODB_URI =
-  "mongodb+srv://manish:admin@cluster0.6x2ozql.mongodb.net/fs-mern?retryWrites=true&w=majority";
-
 mongoose.set("strictQuery", true);
 
 mongoose
-  .connect(MONGODB_URI, {
+  .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
